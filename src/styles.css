@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+}
+
+header {
+	background: #490314;
+	position: fixed;
+	width: 100vw;
+	height: 64px;
+	padding: 16px 58px;
+	z-index: 1000;
+}
+
+header svg {
+	height: 34px;
+}
