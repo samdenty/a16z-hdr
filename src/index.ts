@@ -48,11 +48,12 @@ const loader = new GLTFLoader();
 	);
 	scene.add(gtlf.scene);
 
-	let mouseX = 0;
-	let mouseY = 0;
+	let controls: OrbitControls | null = null;
+	let mouseX: number | null = null;
+	let mouseY: number | null = null;
 
 	if ("ontouchstart" in window) {
-		const controls = new OrbitControls(camera, renderer.domElement);
+		controls = new OrbitControls(camera, renderer.domElement);
 
 		controls.enableRotate = true;
 		controls.minPolarAngle = Math.PI / 3; // Limit vertical rotation
@@ -60,6 +61,9 @@ const loader = new GLTFLoader();
 		controls.minAzimuthAngle = -Math.PI / 6; // Limit horizontal rotation
 		controls.maxAzimuthAngle = Math.PI / 6; // Limit horizontal rotation
 	} else {
+		mouseX = 0;
+		mouseY = 0;
+
 		window.addEventListener("mousemove", (e) => {
 			mouseX = (e.clientX / window.innerWidth) * 2 - 1;
 			mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -71,8 +75,27 @@ const loader = new GLTFLoader();
 
 	function updateLightPositions() {
 		angle += 0.02;
-		const x = mouseX + Math.cos(angle) * radius;
-		const y = mouseY + Math.sin(angle) * radius;
+
+		let x = mouseX!;
+		let y = mouseY!;
+
+		if (x == null) {
+			x =
+				Math.sin(controls?._spherical.theta) *
+				Math.cos(controls?._spherical.phi);
+		}
+
+		if (y == null) {
+			y =
+				Math.sin(controls?._spherical.theta) *
+				Math.sin(controls?._spherical.phi);
+		}
+
+		console.log(x, y);
+
+		x += Math.cos(angle) * radius;
+		y += Math.sin(angle) * radius;
+
 		light.position.x = x;
 		light.position.y = y;
 		highlight.position.x = x;
