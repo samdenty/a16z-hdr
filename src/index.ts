@@ -1,8 +1,11 @@
 import "./styles.css";
 import * as THREE from "three";
-// @ts-ignore
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { inject } from "@vercel/analytics";
+
+inject();
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
 	75,
@@ -120,29 +123,29 @@ const loader = new GLTFLoader();
 		// Create HDR toggle checkbox
 		const hdrToggle = document.createElement("div");
 		hdrToggle.style.cssText = `
-              position: fixed;
-              top: 74px;
-              left: 10px;
-              cursor: pointer;
-              z-index: 100;
-              color: #fff;
-              font-family: Helvetica, Arial, sans-serif;
-              font-size: 12px;
-              background: rgba(0,0,0,0.65);
-              border: 1px solid #fff;
-              padding: 6px 10px;
-              border-radius: 3px;
-              display: flex;
-              align-items: center;
-              gap: 6px;
+        position: fixed;
+        top: 74px;
+        left: 10px;
+        cursor: pointer;
+        z-index: 100;
+        color: #fff;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        background: rgba(0,0,0,0.65);
+        border: 1px solid #fff;
+        padding: 6px 10px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       `;
 
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
 		checkbox.id = "hdr-toggle";
 		checkbox.style.cssText = `
-              cursor: pointer;
-              margin: 0;
+        cursor: pointer;
+        margin: 0;
       `;
 		checkbox.checked = true;
 
@@ -150,8 +153,8 @@ const loader = new GLTFLoader();
 		label.htmlFor = "hdr-toggle";
 		label.textContent = "Toggle HDR";
 		label.style.cssText = `
-              cursor: pointer;
-              user-select: none;
+        cursor: pointer;
+        user-select: none;
       `;
 
 		checkbox.addEventListener("change", function () {
