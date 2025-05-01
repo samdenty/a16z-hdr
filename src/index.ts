@@ -51,10 +51,12 @@ const loader = new GLTFLoader();
 	let mouseX = 0;
 	let mouseY = 0;
 
-	window.addEventListener("mousemove", (e) => {
-		mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-		mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-	});
+	if (!("ontouchstart" in window)) {
+		window.addEventListener("mousemove", (e) => {
+			mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+			mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+		});
+	}
 
 	let angle = 0;
 	const radius = 0.3;
