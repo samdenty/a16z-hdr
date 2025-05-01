@@ -1,3 +1,3 @@
-# [HDR a16z medallion](https://a16z-hdr.vercel.app/)
+# [A16Z HDR Medallion](https://a16z-hdr.vercel.app/)
 
-![a16z medallion hdr](./assets/recording.gif)
+![A16Z HDR Medallion](./assets/recording.gif)
