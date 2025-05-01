@@ -2,7 +2,7 @@ import "./styles.css";
 import * as THREE from "three";
 // @ts-ignore
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
 	75,
@@ -51,7 +51,15 @@ const loader = new GLTFLoader();
 	let mouseX = 0;
 	let mouseY = 0;
 
-	if (!("ontouchstart" in window)) {
+	if ("ontouchstart" in window) {
+		const controls = new OrbitControls(camera, renderer.domElement);
+
+		controls.enableRotate = true;
+		controls.minPolarAngle = Math.PI / 3; // Limit vertical rotation
+		controls.maxPolarAngle = Math.PI / 1.5; // Limit vertical rotation
+		controls.minAzimuthAngle = -Math.PI / 6; // Limit horizontal rotation
+		controls.maxAzimuthAngle = Math.PI / 6; // Limit horizontal rotation
+	} else {
 		window.addEventListener("mousemove", (e) => {
 			mouseX = (e.clientX / window.innerWidth) * 2 - 1;
 			mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
